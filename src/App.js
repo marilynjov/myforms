@@ -13,6 +13,7 @@ function App() {
   });
  
   const handlePasswordChange = ((e) => {
+
     setFormValues({...formValues, password: e.target.value})
   });
  
@@ -22,9 +23,9 @@ function App() {
 
   const clickSubmit = (() => {
     const noVacioP = formValues.password !==""; 
-    const noVacioE = formValues.email !==""; 
+    const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email);
 
-    if (noVacioE && noVacioP) {
+    if (noVacioP && correoValido) {
       validation({...validationStates,email:true, password:true})  
     
       setFormValues({...formValues, email: "", password:""})
@@ -35,7 +36,7 @@ function App() {
     } else {
       
 
-      validation({...validationStates,email:noVacioE,password:noVacioP})  
+      validation({...validationStates,email:correoValido,password:noVacioP})  
       // validation({...validationStates,password:VacioP})
 
 
